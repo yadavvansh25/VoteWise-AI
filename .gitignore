@@ -1,0 +1,36 @@
+# Environment
+.env
+.env.local
+.env.*.local
+*.env
+
+# Dependencies
+node_modules/
+venv/
+.venv/
+env/
+__pycache__/
+*.py[cod]
+
+# Build
+dist/
+build/
+.next/
+out/
+
+# IDE / Misc
+.DS_Store
+.idea/
+.vscode/
+.gemini/
+*.log
+
+# Database
+*.db
+*.sqlite3
+
+# Project specific
+backend/votewise.db
+backend/__pycache__/
+frontend/dist/
+frontend/node_modules/

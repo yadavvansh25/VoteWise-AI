@@ -1,0 +1,41 @@
+{
+  "app": {
+    "title": "VoteWise AI",
+    "tagline": "Your Trusted Election Education Assistant",
+    "subtitle": "Ask me anything about voter registration, candidates, or the voting process"
+  },
+  "chat": {
+    "placeholder": "Ask about voter registration, EVM, candidates...",
+    "send": "Send",
+    "thinking": "Thinking...",
+    "cached": "Instant Answer",
+    "sources": "Sources",
+    "welcome": "👋 Welcome! I'm **VoteWise AI**, your trusted election education assistant.\n\nI can help you with:\n\n🗳️ **Voter Registration** — Check eligibility, register online, track status\n\n👥 **Candidate Information** — Factual, unbiased data on candidates & parties\n\n📋 **Voting Process** — Step-by-step EVM/VVPAT guide, find your booth\n\nWhat would you like to know?"
+  },
+  "quickActions": {
+    "title": "Quick Questions",
+    "register": "How do I register to vote?",
+    "evm": "How does the EVM work?",
+    "booth": "How to find my polling booth?",
+    "eligibility": "Am I eligible to vote?",
+    "vvpat": "What is VVPAT?",
+    "documents": "What documents do I need?"
+  },
+  "accessibility": {
+    "title": "Accessibility",
+    "fontSize": "Font Size",
+    "highContrast": "High Contrast",
+    "reducedMotion": "Reduced Motion",
+    "reset": "Reset"
+  },
+  "language": {
+    "label": "Language",
+    "en": "English",
+    "hi": "हिन्दी",
+    "ta": "தமிழ்"
+  },
+  "footer": {
+    "disclaimer": "VoteWise AI provides educational information only. Always verify with official ECI sources.",
+    "powered": "Powered by Google Gemini"
+  }
+}

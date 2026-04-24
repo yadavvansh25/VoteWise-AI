@@ -1,0 +1,58 @@
+[
+  {
+    "question": "How do I register to vote in India",
+    "answer": "To register as a voter in India, follow these steps:\n\n1. **Visit the National Voters' Service Portal** at [voters.eci.gov.in](https://voters.eci.gov.in)\n2. **Click 'Register as New Voter'** and select Form 6\n3. **Fill in your details**: Name, Date of Birth, Address, and upload a passport-size photo\n4. **Upload documents**: Age proof and address proof\n5. **Submit the form** and note your Reference ID\n6. **Track your status** using the Reference ID\n\n**Eligibility**: You must be an Indian citizen, at least 18 years old, and an ordinary resident of the constituency.\n\n**Alternative methods**: Download the Voter Helpline App or visit your nearest Electoral Registration Office.\n\nHelpline: **1950** (toll-free)",
+    "language": "en",
+    "intent": "registration",
+    "ttl": 604800
+  },
+  {
+    "question": "What is an EVM and how does it work",
+    "answer": "An **EVM (Electronic Voting Machine)** is used in Indian elections for secure, efficient voting.\n\n**Components:**\n- **Ballot Unit (BU)**: Placed in the voting booth with candidate names, symbols, and blue voting buttons\n- **Control Unit (CU)**: Operated by the Presiding Officer to activate voting\n\n**How to vote using an EVM:**\n1. Present your Voter ID at the polling booth\n2. Indelible ink is applied to your finger\n3. The officer presses the Ballot button on the Control Unit\n4. Enter the private voting compartment\n5. Find your chosen candidate on the Ballot Unit\n6. Press the **blue button** next to their name/symbol\n7. A beep confirms your vote is recorded\n8. The VVPAT slip appears for 7 seconds for verification\n9. Exit the booth\n\nEVMs are standalone machines — not connected to any network — ensuring complete security.",
+    "language": "en",
+    "intent": "process_education",
+    "ttl": 604800
+  },
+  {
+    "question": "What is VVPAT",
+    "answer": "**VVPAT (Voter Verifiable Paper Audit Trail)** is an independent verification system attached to the EVM.\n\n**How it works:**\n1. After you press the button on the Ballot Unit, the VVPAT prints a paper slip\n2. The slip shows the **candidate's name** and **party symbol** you voted for\n3. The slip is visible through a transparent window for **7 seconds**\n4. After 7 seconds, the slip is automatically cut and dropped into a sealed box\n\n**Purpose:**\n- Allows voters to verify their vote was correctly recorded\n- Provides a paper trail for audit purposes\n- VVPAT slips from randomly selected booths are cross-verified with EVM results\n\n**Important:** You cannot touch or take the slip. If it doesn't match your vote, report to the Presiding Officer immediately.",
+    "language": "en",
+    "intent": "process_education",
+    "ttl": 604800
+  },
+  {
+    "question": "How to find my polling booth",
+    "answer": "You can find your polling booth through these methods:\n\n**Online:**\n1. Visit **electoralsearch.eci.gov.in** — Search by name or EPIC number\n2. Download the **Voter Helpline App** (Android & iOS)\n3. Visit **voters.eci.gov.in** and check your voter details\n\n**By Phone:**\n- Send SMS: Type **EPIC <your EPIC number>** → Send to **1950**\n- Call toll-free helpline: **1950**\n\n**On Election Day:**\n- Carry your **Voter ID (EPIC card)** or any approved ID\n- Approved alternatives: Aadhaar, Passport, Driving License, PAN card, Bank passbook with photo\n- Polling hours: Usually **7:00 AM to 6:00 PM**\n- Arrive early to avoid long queues",
+    "language": "en",
+    "intent": "process_education",
+    "ttl": 604800
+  },
+  {
+    "question": "What documents do I need to vote",
+    "answer": "To vote on election day, you need **one** of the following approved identity documents:\n\n1. **EPIC Card** (Voter ID Card) — Primary document\n2. **Aadhaar Card**\n3. **Passport**\n4. **Driving License**\n5. **PAN Card**\n6. **Service Identity Card** (for government employees)\n7. **Bank/Post Office Passbook** with photo\n8. **MNREGA Job Card**\n9. **Health Insurance Smart Card** (Ayushman Bharat)\n10. **Pension Document** with photo\n11. **Smart Card** issued by RGI under NPR\n12. **MP/MLA/MLC Identity Card**\n\n⚠️ **Important**: The document must have your **photograph**. Without valid ID, you may not be allowed to vote.",
+    "language": "en",
+    "intent": "process_education",
+    "ttl": 604800
+  },
+  {
+    "question": "Am I eligible to vote",
+    "answer": "You are eligible to vote in India if you meet ALL of the following criteria:\n\n✅ **Citizenship**: You must be an Indian citizen\n✅ **Age**: You must be at least **18 years old** on the qualifying date\n✅ **Residency**: You must be an ordinary resident of the constituency\n✅ **Sound Mind**: Not declared of unsound mind by a court\n✅ **No Disqualification**: Not barred under electoral offence laws\n\n**Qualifying Dates** (your age is checked as of):\n- January 1\n- April 1\n- July 1\n- October 1\n\n**NRI Voters**: Indian citizens living abroad can register using **Form 6A** with a valid Indian passport.\n\nRegister at: **voters.eci.gov.in** | Helpline: **1950**",
+    "language": "en",
+    "intent": "registration",
+    "ttl": 604800
+  },
+  {
+    "question": "भारत में मतदाता पंजीकरण कैसे करें",
+    "answer": "भारत में मतदाता के रूप में पंजीकरण करने के लिए:\n\n1. **राष्ट्रीय मतदाता सेवा पोर्टल** पर जाएं: [voters.eci.gov.in](https://voters.eci.gov.in)\n2. **'नए मतदाता के रूप में पंजीकरण करें'** पर क्लिक करें और फॉर्म 6 चुनें\n3. **अपनी जानकारी भरें**: नाम, जन्म तिथि, पता, और पासपोर्ट साइज फोटो अपलोड करें\n4. **दस्तावेज़ अपलोड करें**: आयु प्रमाण और पता प्रमाण\n5. **फॉर्म जमा करें** और अपना संदर्भ आईडी नोट करें\n\n**पात्रता**: भारतीय नागरिक, कम से कम 18 वर्ष की आयु, और निर्वाचन क्षेत्र का सामान्य निवासी होना चाहिए।\n\nहेल्पलाइन: **1950** (टोल-फ्री)",
+    "language": "hi",
+    "intent": "registration",
+    "ttl": 604800
+  },
+  {
+    "question": "இந்தியாவில் வாக்காளராக பதிவு செய்வது எப்படி",
+    "answer": "இந்தியாவில் வாக்காளராக பதிவு செய்ய:\n\n1. **தேசிய வாக்காளர் சேவை இணையதளம்** பார்வையிடுங்கள்: [voters.eci.gov.in](https://voters.eci.gov.in)\n2. **'புதிய வாக்காளராக பதிவு செய்'** என்பதைக் கிளிக் செய்து படிவம் 6 ஐ தேர்ந்தெடுக்கவும்\n3. **உங்கள் விவரங்களை நிரப்பவும்**: பெயர், பிறந்த தேதி, முகவரி, புகைப்படம்\n4. **ஆவணங்களை பதிவேற்றவும்**: வயது சான்று மற்றும் முகவரி சான்று\n5. **படிவத்தை சமர்ப்பிக்கவும்** மற்றும் உங்கள் குறிப்பு எண்ணை குறித்துக்கொள்ளவும்\n\n**தகுதி**: இந்திய குடிமகன், குறைந்தது 18 வயது, மற்றும் தொகுதியின் சாதாரண குடியிருப்பாளராக இருக்க வேண்டும்.\n\nஉதவி எண்: **1950** (இலவசம்)",
+    "language": "ta",
+    "intent": "registration",
+    "ttl": 604800
+  }
+]
