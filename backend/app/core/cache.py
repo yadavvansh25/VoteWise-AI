@@ -154,6 +154,11 @@ async def seed_faqs(faqs: list, db_path: str = None) -> int:
     """
     count = 0
     for faq in faqs:
+        # Validate required keys
+        if not all(k in faq for k in ["question", "answer"]):
+            logger.warning("Skipping invalid FAQ entry: %s", faq)
+            continue
+
         success = await cache_answer(
             question=faq["question"],
             answer=faq["answer"],

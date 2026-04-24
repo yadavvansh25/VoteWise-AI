@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import type { AccessibilitySettings } from '../types';
 
 interface AccessibilityPanelProps {
@@ -6,6 +7,7 @@ interface AccessibilityPanelProps {
   toggleHighContrast: () => void;
   toggleReducedMotion: () => void;
   resetSettings: () => void;
+  onClose: () => void;
   t: (key: string) => string;
 }
 
@@ -15,8 +17,23 @@ export default function AccessibilityPanel({
   toggleHighContrast,
   toggleReducedMotion,
   resetSettings,
+  onClose,
   t,
 }: AccessibilityPanelProps) {
+  const panelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Focus first element on open
+    const firstInput = panelRef.current?.querySelector('input');
+    firstInput?.focus();
+
+    // Close on Escape
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
   return (
     <div className="a11y-panel" role="dialog" aria-label="Accessibility settings" id="a11y-panel">
       <h2 className="a11y-panel__title">{t('accessibility.title')}</h2>

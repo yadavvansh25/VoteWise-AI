@@ -3,9 +3,31 @@ VoteWise AI — Application Configuration
 Uses pydantic-settings for environment variable management.
 """
 
-from pydantic_settings import BaseSettings, SettingsConfigDict
-from typing import List
+import logging
+import os
 from functools import lru_cache
+from typing import List
+
+from pydantic_settings import BaseSettings, SettingsConfigDict
+from google.cloud import secretmanager
+
+logger = logging.getLogger("votewise.config")
+
+def get_secret_from_gcp(secret_id: str, default: str) -> str:
+    """Fetch a secret from Google Cloud Secret Manager."""
+    try:
+        project_id = os.getenv("GOOGLE_CLOUD_PROJECT")
+        if not project_id:
+            logger.info("GOOGLE_CLOUD_PROJECT not set, skipping Secret Manager")
+            return default
+            
+        client = secretmanager.SecretManagerServiceClient()
+        name = f"projects/{project_id}/secrets/{secret_id}/versions/latest"
+        response = client.access_secret_version(request={"name": name})
+        return response.payload.data.decode("UTF-8")
+    except Exception as e:
+        logger.info(f"Could not fetch secret {secret_id} from Secret Manager: {e}")
+        return default
 
 
 class Settings(BaseSettings):
@@ -19,7 +41,7 @@ class Settings(BaseSettings):
 
     # Google AI
     GEMINI_API_KEY: str = ""
-    GEMINI_MODEL: str = "gemini-1.5-flash"
+    GEMINI_MODEL: str = "gemini-flash-latest"
 
     # Database
     DATABASE_PATH: str = "./votewise.db"

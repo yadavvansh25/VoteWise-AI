@@ -3,6 +3,9 @@ VoteWise AI — FastAPI Application Entry Point
 Configures middleware, lifespan events, and routes.
 """
 
+import os
+import time
+import uuid
 import json
 import logging
 from contextlib import asynccontextmanager
@@ -13,6 +16,7 @@ from pathlib import Path
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.staticfiles import StaticFiles
 
 from app.config import get_settings
@@ -26,14 +30,26 @@ from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 from app.core.rate_limiter import limiter
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s | %(name)s | %(levelname)s | %(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S",
-)
+from app.core.logging import setup_cloud_logging
+
+# Configure Cloud Logging for GCP
+setup_cloud_logging()
 logger = logging.getLogger("votewise")
 
+# Performance & Observability: GCP Cloud Trace & Profiler
+try:
+    from google.cloud import profiler
+    from google.cloud import trace_v2
+    
+    project_id = os.getenv("GOOGLE_CLOUD_PROJECT")
+    if project_id:
+        # Start Profiler
+        profiler.start(service="votewise-ai", service_version="1.0.0", verbose=1)
+        logger.info("✅ GCP Cloud Profiler initialized")
+except ImportError:
+    logger.info("ℹ️ GCP Profiler/Trace not installed, skipping")
+except Exception as e:
+    logger.warning(f"⚠️ Could not initialize GCP services: {e}")
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -108,6 +124,9 @@ def create_app() -> FastAPI:
     # Rate Limiting
     app.state.limiter = limiter
     app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
+    # Gzip Compression
+    app.add_middleware(GZipMiddleware, minimum_size=1000)
 
     # --- Routes ---
     app.include_router(api_router)

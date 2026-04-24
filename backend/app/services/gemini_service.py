@@ -102,43 +102,71 @@ class GeminiService:
 
             config = types.GenerateContentConfig(**config_kwargs)
 
-            # Generate response
-            response = client.models.generate_content(
-                model=self._model,
-                contents=contents,
-                config=config,
-            )
+            # List of models to try in order of preference
+            models_to_try = [
+                self._model,  # Primary model from config
+                "gemini-2.0-flash",
+                "gemini-flash-latest",
+                "gemini-1.5-flash",
+                "gemini-1.5-flash-8b",
+            ]
 
-            # Extract response text
-            response_text = response.text if response.text else ""
+            last_error = "Unknown error"
 
-            # Extract grounding sources
-            sources = []
-            if use_grounding and response.candidates:
-                candidate = response.candidates[0]
-                grounding_meta = getattr(candidate, "grounding_metadata", None)
-                if grounding_meta:
-                    chunks = getattr(grounding_meta, "grounding_chunks", [])
-                    if chunks:
-                        for chunk in chunks:
-                            web = getattr(chunk, "web", None)
-                            if web:
-                                sources.append({
-                                    "title": getattr(web, "title", "Source"),
-                                    "url": getattr(web, "uri", ""),
-                                    "snippet": None,
-                                })
+            for model_name in models_to_try:
+                try:
+                    # Use a cleaner model name (remove models/ prefix if present)
+                    clean_model_name = model_name.replace("models/", "")
+                    
+                    logger.info(f"Attempting response with model: {clean_model_name}")
+                    
+                    # Generate response
+                    response = self._client.models.generate_content(
+                        model=clean_model_name,
+                        contents=contents,
+                        config=config,
+                    )
 
-            logger.info(
-                "Gemini response generated: intent=%s, language=%s, "
-                "grounded=%s, sources=%d",
-                intent, language, use_grounding, len(sources),
-            )
+                    if not response or not response.text:
+                        logger.warning(f"Empty response from model {clean_model_name}")
+                        continue
 
+                    logger.info(f"Successfully generated response with model: {clean_model_name}")
+                    
+                    # Extract sources if available (Google Search Grounding)
+                    sources = []
+                    if hasattr(response, "candidates") and response.candidates:
+                        first_candidate = response.candidates[0]
+                        if hasattr(first_candidate, "grounding_metadata") and first_candidate.grounding_metadata:
+                            metadata = first_candidate.grounding_metadata
+                            if hasattr(metadata, "grounding_chunks") and metadata.grounding_chunks:
+                                for chunk in metadata.grounding_chunks:
+                                    if hasattr(chunk, "web") and chunk.web:
+                                        sources.append({
+                                            "title": chunk.web.title or "Source",
+                                            "url": chunk.web.uri
+                                        })
+
+                    return {
+                        "text": response.text,
+                        "sources": sources,
+                        "grounding_metadata": bool(sources),
+                        "model": clean_model_name
+                    }
+
+                except Exception as e:
+                    last_error = str(e)
+                    logger.warning(f"Failed with model {model_name}: {last_error}")
+                    # Continue to next model
+                    continue
+
+            # If all models fail
+            logger.error(f"All Gemini models failed. Last error: {last_error}")
             return {
-                "text": response_text,
-                "sources": sources,
-                "grounding_metadata": bool(sources),
+                "text": _get_fallback_response(language),
+                "sources": [],
+                "grounding_metadata": False,
+                "error": True
             }
 
         except Exception as e:

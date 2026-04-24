@@ -25,12 +25,15 @@ COPY backend/ .
 # Copy frontend build artifacts to backend/static
 COPY --from=frontend-builder /app/frontend/dist ./static
 
+# Create non-root user for security
+RUN adduser --disabled-password --gecos "" votewise
+RUN chown -R votewise:votewise /app
+USER votewise
+
 # Environment variables
 ENV PORT=8080
 ENV DATABASE_PATH=/app/votewise.db
 
-# Expose port
+# Expose port and run
 EXPOSE 8080
-
-# Command to run the application
-CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT}"]
+CMD ["gunicorn", "app.main:app", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "-b", "0.0.0.0:8080"]

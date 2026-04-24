@@ -44,6 +44,9 @@ export default function App() {
 
   return (
     <>
+      <a href="#chat-main" className="skip-link">
+        Skip to main content
+      </a>
       <Header
         language={language}
         setLanguage={setLanguage}
@@ -59,11 +62,12 @@ export default function App() {
           toggleHighContrast={toggleHighContrast}
           toggleReducedMotion={toggleReducedMotion}
           resetSettings={resetSettings}
+          onClose={() => setA11yOpen(false)}
           t={t}
         />
       )}
 
-      <main className="chat-container" role="main">
+      <main className="chat-container" role="main" id="chat-main" tabIndex={-1}>
         <div className="chat-messages" aria-live="polite" aria-relevant="additions">
           {/* Welcome Message */}
           {showWelcome && messages.length === 0 && (
