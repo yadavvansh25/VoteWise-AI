@@ -10,8 +10,8 @@ from pathlib import Path
 
 from pathlib import Path
 
-from fastapi import FastAPI, FileResponse
-from fastapi.responses import JSONResponse
+from fastapi import FastAPI
+from fastapi.responses import JSONResponse, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 

@@ -17,6 +17,11 @@ export default function App() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [showWelcome, setShowWelcome] = useState(true);
 
+  // Update HTML lang attribute for screen readers
+  useEffect(() => {
+    document.documentElement.lang = language;
+  }, [language]);
+
   // Auto-scroll to bottom on new messages
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });

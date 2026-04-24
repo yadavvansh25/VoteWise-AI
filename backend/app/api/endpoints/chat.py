@@ -156,5 +156,5 @@ async def chat(request: Request, body: ChatRequest) -> ChatResponse:
         logger.error("Chat endpoint error: %s", str(e), exc_info=True)
         raise HTTPException(
             status_code=500,
-            detail="An error occurred while processing your body. Please try again.",
+            detail="An error occurred while processing your request. Please try again.",
         )

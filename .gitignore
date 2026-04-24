@@ -34,3 +34,4 @@ backend/votewise.db
 backend/__pycache__/
 frontend/dist/
 frontend/node_modules/
+gcp_sdk/
