@@ -8,8 +8,12 @@ import logging
 from contextlib import asynccontextmanager
 from pathlib import Path
 
-from fastapi import FastAPI
+from pathlib import Path
+
+from fastapi import FastAPI, FileResponse
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 from app.config import get_settings
 from app.api.router import api_router
@@ -108,14 +112,28 @@ def create_app() -> FastAPI:
     # --- Routes ---
     app.include_router(api_router)
 
-    @app.get("/")
-    async def root():
-        return {
-            "name": settings.APP_NAME,
-            "version": settings.APP_VERSION,
-            "docs": "/docs",
-            "health": "/api/health",
-        }
+    # --- Static Files & SPA Support ---
+    static_path = Path(__file__).parent.parent / "static"
+    
+    if static_path.exists():
+        app.mount("/", StaticFiles(directory=static_path, html=True), name="static")
+        
+        # Fallback for SPA routing: serve index.html for any unknown route
+        @app.exception_handler(404)
+        async def spa_fallback(request, exc):
+            if not request.url.path.startswith("/api"):
+                return FileResponse(static_path / "index.html")
+            return JSONResponse({"detail": "Not Found"}, status_code=404)
+    else:
+        @app.get("/")
+        async def root():
+            return {
+                "name": settings.APP_NAME,
+                "version": settings.APP_VERSION,
+                "docs": "/docs",
+                "health": "/api/health",
+                "message": "Build frontend and place in backend/static to see the UI here."
+            }
 
     return app
 

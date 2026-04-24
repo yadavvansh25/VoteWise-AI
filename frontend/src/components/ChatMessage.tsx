@@ -1,3 +1,4 @@
+import React from 'react';
 import type { ChatMessage as ChatMessageType } from '../types';
 
 interface ChatMessageProps {
@@ -6,7 +7,7 @@ interface ChatMessageProps {
 }
 
 /** Minimal markdown-like rendering: bold, links, line breaks */
-function renderContent(text: string): JSX.Element[] {
+function renderContent(text: string): React.ReactNode[] {
   const lines = text.split('\n');
   return lines.map((line, i) => {
     if (line.trim() === '---') {
@@ -18,20 +19,19 @@ function renderContent(text: string): JSX.Element[] {
     }
 
     // Replace **bold** with <strong>
-    const parts: (string | JSX.Element)[] = [];
+    const parts: (string | React.ReactNode)[] = [];
     const boldRegex = /\*\*(.+?)\*\*/g;
     let lastIndex = 0;
     let match;
 
     const lineWithLinks = line;
-    const tempParts: (string | JSX.Element)[] = [];
 
     // Handle links [text](url) first
     const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
     let linkLastIndex = 0;
     let linkMatch;
     let processedLine = '';
-    const linkElements: { placeholder: string; element: JSX.Element }[] = [];
+    const linkElements: { placeholder: string; element: React.ReactNode }[] = [];
     let linkIdx = 0;
 
     while ((linkMatch = linkRegex.exec(lineWithLinks)) !== null) {
